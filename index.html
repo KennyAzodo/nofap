@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hold This in November</title>
 <style>
     body {
@@ -16,11 +17,24 @@
 
     .card {
         background: white;
-        width: 460px;
+        width: 90%;
+        max-width: 460px;
         padding: 55px 45px;
         border-radius: 18px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         text-align: center;
+    }
+
+    /* ✅ Smaller screens – reduce width & padding */
+    @media(max-width: 480px) {
+        .card {
+            width: 92%;
+            padding: 45px 28px;
+            border-radius: 16px;
+        }
+        h2 {
+            font-size: 24px;
+        }
     }
 
     .logo img {
@@ -28,7 +42,7 @@
         height: 78px;
         border-radius: 50%;
         animation: spinSlow 3s ease-in-out forwards;
-        margin-bottom: 14px; /* ✅ space added below logo */
+        margin-bottom: 14px;
     }
 
     h2 {
@@ -139,35 +153,20 @@
         margin-top: 10px;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    @keyframes spin {
-        from { transform: rotate(0deg) scale(0.6); }
-        to { transform: rotate(720deg) scale(1); }
-    }
-
-    @keyframes spinSlow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spin { from { transform: rotate(0deg) scale(0.6); } to { transform: rotate(720deg) scale(1); } }
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
 <div class="card" id="mainCard">
-    <div class="logo">
-        <img src="nofap.avif" alt="NoFap Logo">
-    </div>
+    <div class="logo"><img src="nofap.avif" alt="NoFap Logo"></div>
 
     <h2>Nofap November</h2>
     <div class="subtitle">Join the Challenge</div>
 
-    <div class="box">
-        I pledge to <span class="nut-bold">$Nofap</span> for the entire month of November (30 days).
-    </div>
+    <div class="box">I pledge to <span class="nut-bold">$Nofap</span> for the entire month of November (30 days).</div>
 
     <div class="checkbox-row">
         <input type="checkbox" id="agreeCheckbox">
@@ -175,46 +174,40 @@
     </div>
 
     <button id="enterBtn" disabled>Enter Challenge</button>
-
-    <div class="footer">
-        Only 0.09% complete the challenge. Will you be one of them?
-    </div>
+    <div class="footer">Only 0.09% complete the challenge. Will you be one of them?</div>
 </div>
 
-<!-- ACCESS GRANTED POPUP -->
 <div class="access-granted" id="accessGranted">
-    <div class="access-logo">
-        <img src="nofap.avif" alt="NoFap Access">
-    </div>
+    <div class="access-logo"><img src="nofap.avif" alt="NoFap Access"></div>
     <h2 class="access-text">ACCESS GRANTED</h2>
 </div>
 
 <script>
-    const checkbox = document.getElementById("agreeCheckbox");
-    const button = document.getElementById("enterBtn");
-    const accessGranted = document.getElementById("accessGranted");
-    const mainCard = document.getElementById("mainCard");
+const checkbox = document.getElementById("agreeCheckbox");
+const button = document.getElementById("enterBtn");
+const accessGranted = document.getElementById("accessGranted");
+const mainCard = document.getElementById("mainCard");
 
-    checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-            button.disabled = false;
-            button.classList.add("enabled");
-        } else {
-            button.disabled = true;
-            button.classList.remove("enabled");
-        }
-    });
+checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+        button.disabled = false;
+        button.classList.add("enabled");
+    } else {
+        button.disabled = true;
+        button.classList.remove("enabled");
+    }
+});
 
-    button.addEventListener("click", () => {
-        if (!button.disabled) {
-            mainCard.style.display = "none";
-            accessGranted.classList.add("active");
+button.addEventListener("click", () => {
+    if (!button.disabled) {
+        mainCard.style.display = "none";
+        accessGranted.classList.add("active");
 
-            setTimeout(() => {
-                window.location.href = "challenge-dashboard.html";
-            }, 4500);
-        }
-    });
+        setTimeout(() => {
+            window.location.href = "challenge-dashboard.html";
+        }, 4500);
+    }
+});
 </script>
 
 </body>
